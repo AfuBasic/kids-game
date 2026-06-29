@@ -56,7 +56,7 @@ export const BouncyButton: React.FC<BouncyButtonProps> = ({
       whileTap={{ scale: tapScale }}
       className={`px-8 py-4 font-bold text-2xl rounded-3xl transition-transform cursor-pointer outline-none ${getVariantStyles()} ${className}`}
       onClick={handleClick}
-      {...props}
+      {...(props as any)}
     >
       {children}
     </motion.button>
@@ -261,7 +261,6 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
 
             <BouncyButton
               variant="success"
-              size="lg"
               className="w-full text-3xl py-5"
               onClick={onNext}
             >

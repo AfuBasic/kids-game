@@ -25,6 +25,7 @@ import {
   BirdSVG,
   KidSVG,
   AvatarSVG,
+  BasketSVG,
 } from '@/components/SVGIcons';
 import { FiArrowLeft } from 'react-icons/fi';
 
