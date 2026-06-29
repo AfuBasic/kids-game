@@ -389,13 +389,126 @@ export const GamePlayer: React.FC = () => {
                 key={i}
                 whileHover={{ scale: 1.1 }}
                 onClick={() => {
-                  if (step <= i) incrementStep();
+                  if (step < gameVars.targetVal) {
+                    const next = step + 1;
+                    setStep(next);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                  }
                 }}
                 className="cursor-pointer text-6xl"
               >
                 {step > i ? '💥' : '🎈'}
               </motion.div>
             ))}
+          </div>
+        )}
+
+        {/* Render Rocket Countdown */}
+        {gameId === 'rocket-down' && (
+          <div className="flex flex-col items-center w-full">
+            <motion.div
+              animate={step >= gameVars.targetVal ? { y: -300, scale: 1.2 } : { y: [0, -2, 0], x: [-1, 1, -1, 1, 0] }}
+              transition={step >= gameVars.targetVal ? { duration: 1.8, ease: "easeIn" } : { repeat: Infinity, duration: 0.15 }}
+              className="w-36 h-36 mb-6"
+            >
+              <RocketSVG className="w-full h-full" />
+              {(step >= gameVars.targetVal / 2) && (
+                <div className="absolute bottom-[-16px] left-1/2 -translate-x-1/2">
+                  <FlameSVG className="w-12 h-12" />
+                </div>
+              )}
+            </motion.div>
+            {step < gameVars.targetVal ? (
+              <BouncyButton
+                variant="secondary"
+                onClick={() => {
+                  const next = step + 1;
+                  setStep(next);
+                  audioService.play('tap');
+                  if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                }}
+              >
+                Count Down: {gameVars.targetVal - step} (Tap!)
+              </BouncyButton>
+            ) : (
+              <div className="text-3xl font-black text-coral animate-bounce">BLAST OFF! 🚀</div>
+            )}
+          </div>
+        )}
+
+        {/* Render Balloon Countdown */}
+        {gameId === 'balloon-down' && (
+          <div className="flex flex-col items-center w-full">
+            {step >= gameVars.targetVal ? (
+              <RainbowSVG className="w-48 h-32 animate-bounce" />
+            ) : (
+              <div className="flex gap-4 flex-wrap justify-center">
+                {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    onClick={() => {
+                      const next = step + 1;
+                      setStep(next);
+                      audioService.play('pop');
+                      if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                    }}
+                    className="text-5xl cursor-pointer"
+                  >
+                    🎈
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Render Cookie Monster countdown */}
+        {gameId === 'cookie-monster' && (
+          <div className="flex flex-col items-center w-full">
+            <div className="text-7xl mb-4">🐻😋🍪</div>
+            <div className="flex gap-3 flex-wrap justify-center">
+              {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.15 }}
+                  onClick={() => {
+                    const next = step + 1;
+                    setStep(next);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                  }}
+                  className="text-5xl cursor-pointer select-none"
+                >
+                  🍪
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Render Frogs on a Log */}
+        {gameId === 'frogs-log' && (
+          <div className="flex flex-col items-center w-full pt-10">
+            <div className="bg-amber-800/80 h-8 w-full rounded-full mb-10 relative border-4 border-amber-900">
+              <div className="absolute inset-0 flex justify-center gap-6 -top-10">
+                {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ y: -5 }}
+                    onClick={() => {
+                      const next = step + 1;
+                      setStep(next);
+                      audioService.play('pop');
+                      if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                    }}
+                    className="text-4xl cursor-pointer"
+                  >
+                    🐸
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
