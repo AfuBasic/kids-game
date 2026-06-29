@@ -4,6 +4,7 @@ import { useChild } from '@/providers/ChildProvider';
 import { CharacterBubble, FloatingDecorations } from '@/components/KidsElements';
 import { useNavigate } from 'react-router-dom';
 import { db } from '@/database/db';
+import { audioService } from '@/services/AudioService';
 import { FiHome, FiLock, FiStar, FiAward, FiCheck } from 'react-icons/fi';
 import { CustomStarSVG, CustomTrophySVG } from '@/components/SVGIcons';
 
