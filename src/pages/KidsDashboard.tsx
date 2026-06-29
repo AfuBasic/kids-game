@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useChild } from '../providers/ChildProvider';
-import { BouncyButton, CharacterBubble, FloatingDecorations } from '../components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { BouncyButton, CharacterBubble, FloatingDecorations } from '@/components/KidsElements';
 import { useNavigate } from 'react-router-dom';
-import { audioService } from '../services/AudioService';
+import { audioService } from '@/services/AudioService';
 import { FiHome, FiLock, FiStar, FiAward, FiSettings } from 'react-icons/fi';
-import { AvatarSVG, CustomStarSVG, CustomTrophySVG, AppleSVG, RocketSVG } from '../components/SVGIcons';
+import { AvatarSVG, CustomStarSVG, CustomTrophySVG, AppleSVG, RocketSVG } from '@/components/SVGIcons';
 
 export const KidsDashboard: React.FC = () => {
   const { activeChild, settings } = useChild();

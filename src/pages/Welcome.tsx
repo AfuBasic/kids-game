@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useChild } from '../providers/ChildProvider';
-import { BouncyButton, FloatingDecorations } from '../components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { BouncyButton, FloatingDecorations } from '@/components/KidsElements';
 import { useNavigate } from 'react-router-dom';
 import { FiPlus, FiSettings, FiUser } from 'react-icons/fi';
-import { RainbowSVG, AvatarSVG, CustomStarSVG } from '../components/SVGIcons';
+import { RainbowSVG, AvatarSVG, CustomStarSVG } from '@/components/SVGIcons';
 
 export const Welcome: React.FC = () => {
   const { children, selectChild, createProfile } = useChild();

@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ChildProvider } from './providers/ChildProvider';
-import { Welcome } from './pages/Welcome';
-import { KidsDashboard } from './pages/KidsDashboard';
-import { CountUp } from './features/numeracy/CountUp';
-import { CountDown } from './features/numeracy/CountDown';
-import { ParentSettings } from './pages/ParentSettings';
-import { NumeracyHome } from './features/numeracy/NumeracyHome';
-import { GamePlayer } from './features/numeracy/GamePlayer';
+import { ChildProvider } from '@/providers/ChildProvider';
+import { Welcome } from '@/pages/Welcome';
+import { KidsDashboard } from '@/pages/KidsDashboard';
+import { CountUp } from '@/features/numeracy/CountUp';
+import { CountDown } from '@/features/numeracy/CountDown';
+import { ParentSettings } from '@/pages/ParentSettings';
+import { NumeracyHome } from '@/features/numeracy/NumeracyHome';
+import { GamePlayer } from '@/features/numeracy/GamePlayer';
 
 const App: React.FC = () => {
   return (

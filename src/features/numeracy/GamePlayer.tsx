@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BouncyButton, CharacterBubble, CelebrationModal, ProgressBar } from '../../components/KidsElements';
-import { useChild } from '../../providers/ChildProvider';
-import { audioService } from '../../services/AudioService';
-import { db } from '../../database/db';
-import { AppleSVG, RocketSVG, FlameSVG, CustomStarSVG, CustomTrophySVG, RainbowSVG } from '../../components/SVGIcons';
+import { BouncyButton, CharacterBubble, CelebrationModal, ProgressBar } from '@/components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { audioService } from '@/services/AudioService';
+import { db } from '@/database/db';
+import { AppleSVG, RocketSVG, FlameSVG, CustomStarSVG, CustomTrophySVG, RainbowSVG } from '@/components/SVGIcons';
 import { FiArrowLeft } from 'react-icons/fi';
 
 export const GamePlayer: React.FC = () => {

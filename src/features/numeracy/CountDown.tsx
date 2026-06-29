@@ -5,11 +5,11 @@ import {
   CharacterBubble,
   CelebrationModal,
   ProgressBar,
-} from "../../components/KidsElements";
-import { useChild } from "../../providers/ChildProvider";
-import { audioService } from "../../services/AudioService";
+} from "@/components/KidsElements";
+import { useChild } from "@/providers/ChildProvider";
+import { audioService } from "@/services/AudioService";
 import { useNavigate } from "react-router-dom";
-import { RocketSVG, FlameSVG, CustomStarSVG } from "../../components/SVGIcons";
+import { RocketSVG, FlameSVG, CustomStarSVG } from "@/components/SVGIcons";
 import { FiArrowLeft } from "react-icons/fi";
 
 interface TargetRange {

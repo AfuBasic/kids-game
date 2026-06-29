@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
-import { audioService } from "../services/AudioService";
-import { speechService } from "../services/SpeechService";
+import { audioService } from "@/services/AudioService";
+import { speechService } from "@/services/SpeechService";
 import { FiVolume2 } from "react-icons/fi";
-import { MascotSVG, CustomStarSVG, CustomTrophySVG } from "./SVGIcons";
+import { MascotSVG, CustomStarSVG, CustomTrophySVG } from "@/components/SVGIcons";
 
 // Bouncy Interactive Button
 interface BouncyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

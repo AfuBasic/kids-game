@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useChild } from '../../providers/ChildProvider';
-import { CharacterBubble, FloatingDecorations } from '../../components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { CharacterBubble, FloatingDecorations } from '@/components/KidsElements';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../database/db';
+import { db } from '@/database/db';
 import { FiHome, FiLock, FiStar, FiAward, FiCheck } from 'react-icons/fi';
-import { CustomStarSVG, CustomTrophySVG } from '../../components/SVGIcons';
+import { CustomStarSVG, CustomTrophySVG } from '@/components/SVGIcons';
 
 interface GameConfig {
   id: string;

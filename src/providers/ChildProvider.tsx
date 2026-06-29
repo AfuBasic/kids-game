@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { db, type Child, type ChildSettings } from '../database/db';
-import { audioService } from '../services/AudioService';
-import { speechService } from '../services/SpeechService';
+import { db, type Child, type ChildSettings } from '@/database/db';
+import { audioService } from '@/services/AudioService';
+import { speechService } from '@/services/SpeechService';
 
 interface ChildContextType {
   children: Child[];

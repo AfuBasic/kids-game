@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useChild } from '../providers/ChildProvider';
-import { BouncyButton } from '../components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { BouncyButton } from '@/components/KidsElements';
 import { useNavigate } from 'react-router-dom';
-import { audioService } from '../services/AudioService';
-import { speechService } from '../services/SpeechService';
-import { db } from '../database/db';
+import { audioService } from '@/services/AudioService';
+import { speechService } from '@/services/SpeechService';
+import { db } from '@/database/db';
 import { FiArrowLeft, FiTrash2, FiVolume2, FiSliders, FiEye, FiDownload, FiUpload } from 'react-icons/fi';
-import { AvatarSVG } from '../components/SVGIcons';
+import { AvatarSVG } from '@/components/SVGIcons';
 
 export const ParentSettings: React.FC = () => {
   const {

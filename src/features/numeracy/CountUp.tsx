@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BouncyButton, CharacterBubble, CelebrationModal, ProgressBar } from '../../components/KidsElements';
-import { useChild } from '../../providers/ChildProvider';
-import { audioService } from '../../services/AudioService';
+import { BouncyButton, CharacterBubble, CelebrationModal, ProgressBar } from '@/components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { audioService } from '@/services/AudioService';
 import { useNavigate } from 'react-router-dom';
-import { AppleSVG } from '../../components/SVGIcons';
+import { AppleSVG } from '@/components/SVGIcons';
 import { FiArrowLeft } from 'react-icons/fi';
 
 interface TargetRange {
