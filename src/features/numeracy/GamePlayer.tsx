@@ -1,15 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  BouncyButton,
-  CharacterBubble,
-  CelebrationModal,
-  ProgressBar,
-} from "@/components/KidsElements";
-import { useChild } from "@/providers/ChildProvider";
-import { audioService } from "@/services/AudioService";
-import { db } from "@/database/db";
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { BouncyButton, CharacterBubble, CelebrationModal, ProgressBar } from '@/components/KidsElements';
+import { useChild } from '@/providers/ChildProvider';
+import { audioService } from '@/services/AudioService';
+import { db } from '@/database/db';
 import {
   AppleSVG,
   RocketSVG,
@@ -18,8 +13,20 @@ import {
   CustomTrophySVG,
   RainbowSVG,
   BusSVG,
-} from "@/components/SVGIcons";
-import { FiArrowLeft } from "react-icons/fi";
+  MonsterSVG,
+  EggSVG,
+  ChickSVG,
+  TrainSVG,
+  BalloonSVG,
+  FishSVG,
+  DuckSVG,
+  BananaSVG,
+  CookieSVG,
+  BirdSVG,
+  KidSVG,
+  AvatarSVG,
+} from '@/components/SVGIcons';
+import { FiArrowLeft } from 'react-icons/fi';
 
 export const GamePlayer: React.FC = () => {
   const { gameId } = useParams<{ gameId: string }>();
@@ -27,7 +34,7 @@ export const GamePlayer: React.FC = () => {
   const navigate = useNavigate();
 
   // Game States
-  const [step, setStep] = useState(0); // Current progress/question step
+  const [step, setStep] = useState(0); 
   const [complete, setComplete] = useState(false);
   const [wrongAnswerId, setWrongAnswerId] = useState<number | null>(null);
   const [attempts, setAttempts] = useState(0);
@@ -36,8 +43,8 @@ export const GamePlayer: React.FC = () => {
 
   // Game-specific configurations
   const [gameVars, setGameVars] = useState<any>({
-    title: "",
-    icon: "",
+    title: '',
+    icon: '',
     targetVal: 5,
     additionA: 2,
     additionB: 3,
@@ -53,123 +60,104 @@ export const GamePlayer: React.FC = () => {
     if (!gameId) return;
 
     let targetVal = 5;
-    let title = "";
-    let icon = "";
+    let title = '';
+    let icon = '';
     let additionA = 2;
     let additionB = 2;
     let startVal = 10;
     let subVal = 4;
     let customArray: any[] = [];
 
-    // Customize each game's starting values
     switch (gameId) {
-      case "feed-monster":
-        title = "Feed the Monster";
+      case 'feed-monster':
+        title = 'Feed the Monster';
         targetVal = 4;
-        icon = "👹";
         break;
-      case "hatch-eggs":
-        title = "Hatch the Eggs";
+      case 'hatch-eggs':
+        title = 'Hatch the Eggs';
         targetVal = 5;
-        icon = "🥚";
         break;
-      case "number-train":
-        title = "Number Train";
+      case 'number-train':
+        title = 'Number Train';
         targetVal = 6;
-        icon = "🚂";
         break;
-      case "balloon-pop":
-        title = "Balloon Pop";
+      case 'balloon-pop':
+        title = 'Balloon Pop';
         targetVal = 7;
-        icon = "🎈";
         break;
-      case "aquarium":
-        title = "Aquarium Explorer";
+      case 'aquarium':
+        title = 'Aquarium Explorer';
         targetVal = 5;
-        icon = "🐠";
         break;
-      case "rocket-down":
-        title = "Rocket Countdown";
+      case 'rocket-down':
+        title = 'Rocket Countdown';
         targetVal = 10;
-        icon = "🚀";
         break;
-      case "balloon-down":
-        title = "Balloon Countdown";
+      case 'balloon-down':
+        title = 'Balloon Countdown';
         targetVal = 8;
-        icon = "🎈";
         break;
-      case "cookie-monster":
-        title = "Cookie Monster";
+      case 'cookie-monster':
+        title = 'Cookie Monster';
         targetVal = 10;
-        icon = "🍪";
         break;
-      case "frogs-log":
-        title = "Frogs on a Log";
+      case 'frogs-log':
+        title = 'Frogs on a Log';
         targetVal = 10;
-        icon = "🐸";
         break;
-      case "apple-basket":
-        title = "Apple Basket";
+      case 'apple-basket':
+        title = 'Apple Basket';
         additionA = 3;
         additionB = 2;
         targetVal = 5;
-        icon = "🧺";
         break;
-      case "ducks-pond":
-        title = "Ducks in the Pond";
+      case 'ducks-pond':
+        title = 'Ducks in the Pond';
         additionA = 4;
         additionB = 3;
         targetVal = 7;
-        icon = "🦆";
         break;
-      case "train-passengers":
-        title = "Train Passengers";
+      case 'train-passengers':
+        title = 'Train Passengers';
         additionA = 5;
         additionB = 4;
         targetVal = 9;
-        icon = "🚊";
         break;
-      case "fish-friends":
-        title = "Fish Friends";
+      case 'fish-friends':
+        title = 'Fish Friends';
         additionA = 6;
         additionB = 4;
         targetVal = 10;
-        icon = "🐟";
         break;
-      case "monkey-bananas":
-        title = "Monkey Bananas";
+      case 'monkey-bananas':
+        title = 'Monkey Bananas';
         additionA = 5;
         additionB = 5;
         targetVal = 10;
-        icon = "🍌";
         break;
-      case "cookie-bear":
-        title = "Cookie Bear";
+      case 'cookie-bear':
+        title = 'Cookie Bear';
         startVal = 10;
         subVal = 4;
         targetVal = 6;
-        icon = "🐻";
         break;
-      case "falling-apples":
-        title = "Falling Apples";
+      case 'falling-apples':
+        title = 'Falling Apples';
         startVal = 8;
         subVal = 3;
         targetVal = 5;
-        icon = "🍃";
         break;
-      case "birds-away":
-        title = "Birds Fly Away";
+      case 'birds-away':
+        title = 'Birds Fly Away';
         startVal = 9;
         subVal = 5;
         targetVal = 4;
-        icon = "🐦";
         break;
-      case "school-bus":
-        title = "School Bus";
+      case 'school-bus':
+        title = 'School Bus';
         startVal = 10;
         subVal = 6;
         targetVal = 4;
-        icon = "🚌";
         break;
     }
 
@@ -212,21 +200,19 @@ export const GamePlayer: React.FC = () => {
   }, [gameVars]);
 
   const handleChoice = async (num: number) => {
-    setAttempts((prev) => prev + 1);
+    setAttempts(prev => prev + 1);
     if (num === gameVars.targetVal) {
-      setCorrectAnswers((prev) => prev + 1);
-      audioService.play("correct");
+      setCorrectAnswers(prev => prev + 1);
+      audioService.play('correct');
       setComplete(true);
 
-      // Save stats to database
-      const accuracy =
-        attempts === 0 ? 100 : Math.round((1 / (attempts + 1)) * 100);
+      const accuracy = attempts === 0 ? 100 : Math.round((1 / (attempts + 1)) * 100);
       const playTime = Math.round((Date.now() - startTime.current) / 1000);
 
       await db.progress.add({
         childId: activeChild?.id!,
         gameId: gameId!,
-        category: "numeracy",
+        category: 'numeracy',
         starsEarned: 15,
         coinsEarned: 10,
         accuracy,
@@ -236,67 +222,52 @@ export const GamePlayer: React.FC = () => {
 
       await addRewards(15, 10);
     } else {
-      audioService.play("wrong");
+      audioService.play('wrong');
       setWrongAnswerId(num);
       setTimeout(() => setWrongAnswerId(null), 600);
     }
   };
 
-  const incrementStep = () => {
-    if (step < gameVars.targetVal) {
-      setStep((prev) => prev + 1);
-      audioService.play("pop");
-    }
-  };
-
-  const decrementStep = () => {
-    if (step < gameVars.targetVal) {
-      setStep((prev) => prev + 1);
-      audioService.play("pop");
-    }
-  };
-
-  // Get active instruction text based on game ID
   const getInstruction = () => {
     switch (gameId) {
-      case "feed-monster":
-        return `Feed me ${gameVars.targetVal} apples! Tap to feed!`;
-      case "hatch-eggs":
+      case 'feed-monster':
+        return `Feed Kiko ${gameVars.targetVal} apples! Tap to feed!`;
+      case 'hatch-eggs':
         return `Tap the eggs to hatch ${gameVars.targetVal} baby chicks!`;
-      case "number-train":
+      case 'number-train':
         return `Load the train! Put ${gameVars.targetVal} passengers in!`;
-      case "balloon-pop":
+      case 'balloon-pop':
         return `Pop the floating balloons! Pop all ${gameVars.targetVal}!`;
-      case "aquarium":
+      case 'aquarium':
         return `How many fish are swimming in the aquarium altogether?`;
-      case "rocket-down":
+      case 'rocket-down':
         return `Vibrate the rocket and count down to zero!`;
-      case "balloon-down":
+      case 'balloon-down':
         return `Pop balloons to count down and reveal a rainbow!`;
-      case "cookie-monster":
+      case 'cookie-monster':
         return `Eat cookies! Let's count how many cookies remain!`;
-      case "frogs-log":
+      case 'frogs-log':
         return `Splash frogs! Count how many remain on the log!`;
-      case "apple-basket":
+      case 'apple-basket':
         return `There are ${gameVars.additionA} red apples and ${gameVars.additionB} green apples. How many altogether?`;
-      case "ducks-pond":
+      case 'ducks-pond':
         return `There are ${gameVars.additionA} ducks swimming and ${gameVars.additionB} joining. Count the total!`;
-      case "train-passengers":
+      case 'train-passengers':
         return `${gameVars.additionA} passengers are on the train, and ${gameVars.additionB} join them. How many total?`;
-      case "fish-friends":
+      case 'fish-friends':
         return `A school of ${gameVars.additionA} fish meets ${gameVars.additionB} friends. Count the total!`;
-      case "monkey-bananas":
+      case 'monkey-bananas':
         return `Monkey has ${gameVars.additionA} yellow bananas and ${gameVars.additionB} green ones. Count them all!`;
-      case "cookie-bear":
+      case 'cookie-bear':
         return `Bear starts with ${gameVars.startVal} cookies and eats ${gameVars.subVal}. How many remain?`;
-      case "falling-apples":
+      case 'falling-apples':
         return `Tree had ${gameVars.startVal} apples, but ${gameVars.subVal} fell down. How many are left?`;
-      case "birds-away":
+      case 'birds-away':
         return `${gameVars.startVal} birds sat on the branch. ${gameVars.subVal} flew away. Count the remaining!`;
-      case "school-bus":
+      case 'school-bus':
         return `${gameVars.startVal} kids were on the bus. ${gameVars.subVal} got off. Count who is left!`;
       default:
-        return "Let's count together!";
+        return 'Let\'s count together!';
     }
   };
 
@@ -304,7 +275,7 @@ export const GamePlayer: React.FC = () => {
     <div className="min-h-screen relative p-6 select-none pb-24 text-center">
       <div className="max-w-4xl mx-auto flex items-center justify-between mb-6">
         <button
-          onClick={() => navigate("/kids/numeracy")}
+          onClick={() => navigate('/kids/numeracy')}
           className="flex items-center gap-2 font-bold text-slate-600 hover:text-slate-800 cursor-pointer"
         >
           <FiArrowLeft className="text-2xl" /> Exit Game
@@ -314,12 +285,12 @@ export const GamePlayer: React.FC = () => {
         </span>
       </div>
 
-      <motion.h1
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        className="text-4xl md:text-5xl font-black text-sky-blue drop-shadow-md mb-2 flex items-center justify-center gap-3"
+      <motion.h1 
+        initial={{ scale: 0.8 }} 
+        animate={{ scale: 1 }} 
+        className="text-4xl md:text-5xl font-black text-sky-blue drop-shadow-md mb-2"
       >
-        <span>{gameVars.icon}</span> {gameVars.title}
+        {gameVars.title}
       </motion.h1>
 
       <ProgressBar current={step} total={gameVars.targetVal} />
@@ -328,24 +299,30 @@ export const GamePlayer: React.FC = () => {
 
       {/* Dynamic Game Board area */}
       <div className="relative min-h-[350px] bg-white/70 backdrop-blur-md border-4 border-yellow-300 rounded-[32px] p-6 my-6 shadow-xl flex flex-wrap gap-4 items-center justify-center max-w-2xl mx-auto overflow-hidden">
+        
         {/* Render Feed the Monster */}
-        {gameId === "feed-monster" && (
+        {gameId === 'feed-monster' && (
           <div className="flex flex-col items-center justify-between w-full">
             <motion.div
               animate={{ y: step > 0 ? [0, -10, 0] : 0 }}
-              className="text-9xl mb-8 relative select-none"
+              className="mb-8 relative select-none w-48 h-48 flex items-center justify-center"
             >
-              {step >= gameVars.targetVal ? "🦖😋 burp!" : "🦖 hungry!"}
+              <MonsterSVG expression={step >= gameVars.targetVal ? 'happy' : 'hungry'} className="w-full h-full animate-float" />
             </motion.div>
             <div className="flex gap-4">
               {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.15 }}
-                  onClick={incrementStep}
+                  onClick={() => {
+                    const next = step + 1;
+                    setStep(next);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                  }}
                   className="cursor-pointer select-none"
                 >
-                  <AppleSVG className="w-16 h-16" />
+                  <AppleSVG className="w-16 h-16 animate-bounce" />
                 </motion.div>
               ))}
             </div>
@@ -353,51 +330,62 @@ export const GamePlayer: React.FC = () => {
         )}
 
         {/* Render Hatch Eggs */}
-        {gameId === "hatch-eggs" && (
+        {gameId === 'hatch-eggs' && (
           <div className="flex gap-6 justify-center flex-wrap">
             {Array.from({ length: gameVars.targetVal }).map((_, i) => (
               <motion.div
                 key={i}
                 onClick={() => {
-                  if (step <= i) {
-                    incrementStep();
+                  if (step === i) {
+                    const next = step + 1;
+                    setStep(next);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
                   }
                 }}
-                className="cursor-pointer text-6xl"
+                className="cursor-pointer"
               >
-                {step > i ? "🐣" : "🥚"}
+                {step > i ? (
+                  <ChickSVG className="w-20 h-24 animate-bounce" />
+                ) : (
+                  <EggSVG cracked={step === i} className="w-16 h-20" />
+                )}
               </motion.div>
             ))}
           </div>
         )}
 
         {/* Render Number Train */}
-        {gameId === "number-train" && (
+        {gameId === 'number-train' && (
           <div className="flex flex-col items-center justify-between w-full">
-            <div className="text-8xl mb-8">🚂💨</div>
+            <TrainSVG className="w-56 h-36 mb-6 animate-float" />
             <div className="flex gap-4">
               {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
                 <motion.div
                   key={i}
-                  onClick={incrementStep}
-                  className="text-5xl cursor-pointer"
+                  whileHover={{ y: -5 }}
+                  onClick={() => {
+                    const next = step + 1;
+                    setStep(next);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                  }}
+                  className="w-16 h-16 cursor-pointer"
                 >
-                  🐯
+                  <AvatarSVG name="tiger" className="w-full h-full animate-bounce" />
                 </motion.div>
               ))}
             </div>
-            <div className="flex gap-2 mt-4 bg-slate-300 p-3 rounded-xl min-w-[200px]">
+            <div className="flex gap-2 mt-4 bg-sky-blue/15 border-3 border-dashed border-sky-blue p-3 rounded-2xl min-w-[200px] justify-center">
               {Array.from({ length: step }).map((_, i) => (
-                <span key={i} className="text-4xl">
-                  🐯
-                </span>
+                <AvatarSVG key={i} name="tiger" className="w-10 h-10" />
               ))}
             </div>
           </div>
         )}
 
         {/* Render Balloon Pop */}
-        {gameId === "balloon-pop" && (
+        {gameId === 'balloon-pop' && (
           <div className="flex gap-6 justify-center flex-wrap">
             {Array.from({ length: gameVars.targetVal }).map((_, i) => (
               <motion.div
@@ -407,38 +395,29 @@ export const GamePlayer: React.FC = () => {
                   if (step < gameVars.targetVal) {
                     const next = step + 1;
                     setStep(next);
-                    audioService.play("pop");
-                    if (next === gameVars.targetVal)
-                      handleChoice(gameVars.targetVal);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
                   }
                 }}
-                className="cursor-pointer text-6xl"
+                className="cursor-pointer"
               >
-                {step > i ? "💥" : "🎈"}
+                <BalloonSVG popped={step > i} color={i % 2 === 0 ? '#ff8a65' : '#4fc3f7'} className="w-16 h-24 animate-float" />
               </motion.div>
             ))}
           </div>
         )}
 
         {/* Render Rocket Countdown */}
-        {gameId === "rocket-down" && (
+        {gameId === 'rocket-down' && (
           <div className="flex flex-col items-center w-full">
             <motion.div
-              animate={
-                step >= gameVars.targetVal
-                  ? { y: -300, scale: 1.2 }
-                  : { y: [0, -2, 0], x: [-1, 1, -1, 1, 0] }
-              }
-              transition={
-                step >= gameVars.targetVal
-                  ? { duration: 1.8, ease: "easeIn" }
-                  : { repeat: Infinity, duration: 0.15 }
-              }
+              animate={step >= gameVars.targetVal ? { y: -300, scale: 1.2 } : { y: [0, -2, 0], x: [-1, 1, -1, 1, 0] }}
+              transition={step >= gameVars.targetVal ? { duration: 1.8, ease: "easeIn" } : { repeat: Infinity, duration: 0.15 }}
               className="w-36 h-36 mb-6"
             >
               <RocketSVG className="w-full h-full" />
-              {step >= gameVars.targetVal / 2 && (
-                <div className="absolute bottom-[-16px] left-1/2 -translate-x-1/2">
+              {(step >= gameVars.targetVal / 2) && (
+                <div className="absolute bottom-[-16px] left-1/2 -translate-x-1/2 animate-bounce">
                   <FlameSVG className="w-12 h-12" />
                 </div>
               )}
@@ -449,54 +428,48 @@ export const GamePlayer: React.FC = () => {
                 onClick={() => {
                   const next = step + 1;
                   setStep(next);
-                  audioService.play("tap");
-                  if (next === gameVars.targetVal)
-                    handleChoice(gameVars.targetVal);
+                  audioService.play('tap');
+                  if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
                 }}
               >
                 Count Down: {gameVars.targetVal - step} (Tap!)
               </BouncyButton>
             ) : (
-              <div className="text-3xl font-black text-coral animate-bounce">
-                BLAST OFF! 🚀
-              </div>
+              <div className="text-3xl font-black text-coral animate-bounce">BLAST OFF! 🚀</div>
             )}
           </div>
         )}
 
         {/* Render Balloon Countdown */}
-        {gameId === "balloon-down" && (
+        {gameId === 'balloon-down' && (
           <div className="flex flex-col items-center w-full">
             {step >= gameVars.targetVal ? (
               <RainbowSVG className="w-48 h-32 animate-bounce" />
             ) : (
               <div className="flex gap-4 flex-wrap justify-center">
-                {Array.from({ length: gameVars.targetVal - step }).map(
-                  (_, i) => (
-                    <motion.div
-                      key={i}
-                      onClick={() => {
-                        const next = step + 1;
-                        setStep(next);
-                        audioService.play("pop");
-                        if (next === gameVars.targetVal)
-                          handleChoice(gameVars.targetVal);
-                      }}
-                      className="text-5xl cursor-pointer"
-                    >
-                      🎈
-                    </motion.div>
-                  ),
-                )}
+                {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    onClick={() => {
+                      const next = step + 1;
+                      setStep(next);
+                      audioService.play('pop');
+                      if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <BalloonSVG popped={false} color={i % 2 === 0 ? '#ffb74d' : '#b39ddb'} className="w-16 h-24 animate-float" />
+                  </motion.div>
+                ))}
               </div>
             )}
           </div>
         )}
 
         {/* Render Cookie Monster countdown */}
-        {gameId === "cookie-monster" && (
+        {gameId === 'cookie-monster' && (
           <div className="flex flex-col items-center w-full">
-            <div className="text-7xl mb-4">🐻😋🍪</div>
+            <AvatarSVG name="bear" className="w-36 h-36 mb-6 animate-float" />
             <div className="flex gap-3 flex-wrap justify-center">
               {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
                 <motion.div
@@ -505,13 +478,12 @@ export const GamePlayer: React.FC = () => {
                   onClick={() => {
                     const next = step + 1;
                     setStep(next);
-                    audioService.play("pop");
-                    if (next === gameVars.targetVal)
-                      handleChoice(gameVars.targetVal);
+                    audioService.play('pop');
+                    if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
                   }}
-                  className="text-5xl cursor-pointer select-none"
+                  className="cursor-pointer select-none"
                 >
-                  🍪
+                  <CookieSVG className="w-16 h-16 animate-bounce" />
                 </motion.div>
               ))}
             </div>
@@ -519,203 +491,115 @@ export const GamePlayer: React.FC = () => {
         )}
 
         {/* Render Frogs on a Log */}
-        {gameId === "frogs-log" && (
+        {gameId === 'frogs-log' && (
           <div className="flex flex-col items-center w-full pt-10">
             <div className="bg-amber-800/80 h-8 w-full rounded-full mb-10 relative border-4 border-amber-900">
               <div className="absolute inset-0 flex justify-center gap-6 -top-10">
-                {Array.from({ length: gameVars.targetVal - step }).map(
-                  (_, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -5 }}
-                      onClick={() => {
-                        const next = step + 1;
-                        setStep(next);
-                        audioService.play("pop");
-                        if (next === gameVars.targetVal)
-                          handleChoice(gameVars.targetVal);
-                      }}
-                      className="text-4xl cursor-pointer"
-                    >
-                      🐸
-                    </motion.div>
-                  ),
-                )}
+                {Array.from({ length: gameVars.targetVal - step }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ y: -5 }}
+                    onClick={() => {
+                      const next = step + 1;
+                      setStep(next);
+                      audioService.play('pop');
+                      if (next === gameVars.targetVal) handleChoice(gameVars.targetVal);
+                    }}
+                    className="w-14 h-14 cursor-pointer"
+                  >
+                    <AvatarSVG name="frog" className="w-full h-full animate-bounce" />
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
         )}
 
         {/* Render Quiz Options (Games 5, 10, 11, 12, 13, 14, 15, 16, 17, 18) */}
-        {[
-          "aquarium",
-          "apple-basket",
-          "ducks-pond",
-          "train-passengers",
-          "fish-friends",
-          "monkey-bananas",
-          "cookie-bear",
-          "falling-apples",
-          "birds-away",
-          "school-bus",
-        ].includes(gameId!) && (
+        {['aquarium', 'apple-basket', 'ducks-pond', 'train-passengers', 'fish-friends', 'monkey-bananas', 'cookie-bear', 'falling-apples', 'birds-away', 'school-bus'].includes(gameId!) && (
           <div className="flex flex-col items-center w-full">
             {/* Visual representations */}
-            {gameId === "aquarium" && (
+            {gameId === 'aquarium' && (
               <div className="flex gap-4 flex-wrap justify-center">
                 {Array.from({ length: gameVars.targetVal }).map((_, i) => (
-                  <motion.span
-                    key={i}
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2,
-                      delay: i * 0.2,
-                    }}
-                    className="text-5xl"
-                  >
-                    🐠
-                  </motion.span>
+                  <FishSVG key={i} className="w-16 h-12 animate-float" />
                 ))}
               </div>
             )}
-            {gameId === "apple-basket" && (
+            {gameId === 'apple-basket' && (
               <div className="flex flex-col items-center">
+                <BasketSVG className="w-36 h-36 mb-4 animate-float" />
+                <div className="flex gap-4 items-center">
+                  <div className="flex gap-1">{Array.from({ length: gameVars.additionA }).map((_, i) => <AppleSVG key={i} className="w-10 h-10" />)}</div>
+                  <span className="text-4xl font-bold text-sky-blue">+</span>
+                  <div className="flex gap-1">{Array.from({ length: gameVars.additionB }).map((_, i) => <AppleSVG key={i} className="w-10 h-10" />)}</div>
+                </div>
+              </div>
+            )}
+            {gameId === 'ducks-pond' && (
+              <div className="flex gap-8 items-center">
+                <div className="flex gap-2">{Array.from({ length: gameVars.additionA }).map((_, i) => <DuckSVG key={i} className="w-14 h-14 animate-float" />)}</div>
+                <span className="text-4xl font-bold text-sky-blue">+</span>
+                <div className="flex gap-2">{Array.from({ length: gameVars.additionB }).map((_, i) => <DuckSVG key={i} className="w-14 h-14 animate-float" />)}</div>
+              </div>
+            )}
+            {gameId === 'train-passengers' && (
+              <div className="flex flex-col items-center">
+                <TrainSVG className="w-48 h-32 mb-4 animate-float" />
+                <div className="flex gap-4 items-center">
+                  <div className="flex gap-1">{Array.from({ length: gameVars.additionA }).map((_, i) => <AvatarSVG key={i} name="koala" className="w-10 h-10" />)}</div>
+                  <span className="text-4xl font-bold text-sky-blue">+</span>
+                  <div className="flex gap-1">{Array.from({ length: gameVars.additionB }).map((_, i) => <AvatarSVG key={i} name="koala" className="w-10 h-10" />)}</div>
+                </div>
+              </div>
+            )}
+            {gameId === 'fish-friends' && (
+              <div className="flex gap-8 items-center">
+                <div className="flex gap-1">{Array.from({ length: gameVars.additionA }).map((_, i) => <FishSVG key={i} className="w-12 h-10 animate-float" />)}</div>
+                <span className="text-4xl font-bold text-sky-blue">+</span>
+                <div className="flex gap-1">{Array.from({ length: gameVars.additionB }).map((_, i) => <FishSVG key={i} className="w-12 h-10 animate-float" />)}</div>
+              </div>
+            )}
+            {gameId === 'monkey-bananas' && (
+              <div className="flex flex-col items-center">
+                <AvatarSVG name="monkey" className="w-32 h-32 mb-3 animate-float" />
                 <div className="flex gap-4">
-                  {Array.from({ length: gameVars.additionA }).map((_, i) => (
-                    <AppleSVG key={i} className="w-12 h-12" />
-                  ))}
-                  <span className="text-4xl font-bold">+</span>
-                  {Array.from({ length: gameVars.additionB }).map((_, i) => (
-                    <AppleSVG key={i} className="w-12 h-12" />
-                  ))}
+                  {Array.from({ length: gameVars.additionA + gameVars.additionB }).map((_, i) => <BananaSVG key={i} className="w-10 h-10" />)}
                 </div>
               </div>
             )}
-            {gameId === "ducks-pond" && (
-              <div className="flex gap-8">
-                <div className="flex gap-2">
-                  {Array.from({ length: gameVars.additionA }).map((_, i) => (
-                    <span key={i} className="text-4xl">
-                      🦆
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  {Array.from({ length: gameVars.additionB }).map((_, i) => (
-                    <span key={i} className="text-4xl">
-                      🦆
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {gameId === "train-passengers" && (
-              <div className="flex gap-4">
-                <span className="text-4xl">🚊</span>
-                <div className="flex gap-2 bg-slate-100 p-2 rounded-xl">
-                  {Array.from({ length: gameVars.additionA }).map((_, i) => (
-                    <span key={i} className="text-2xl">
-                      🐨
-                    </span>
-                  ))}
-                  <span className="font-bold">+</span>
-                  {Array.from({ length: gameVars.additionB }).map((_, i) => (
-                    <span key={i} className="text-2xl">
-                      🐨
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {gameId === "fish-friends" && (
-              <div className="flex gap-8">
-                <div className="flex gap-1">
-                  {Array.from({ length: gameVars.additionA }).map((_, i) => (
-                    <span key={i} className="text-3xl">
-                      🐟
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-1">
-                  {Array.from({ length: gameVars.additionB }).map((_, i) => (
-                    <span key={i} className="text-3xl">
-                      🐟
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {gameId === "monkey-bananas" && (
+            {gameId === 'cookie-bear' && (
               <div className="flex flex-col items-center">
-                <span className="text-6xl mb-3">🐵</span>
-                <div className="flex gap-4">
-                  {Array.from({
-                    length: gameVars.additionA + gameVars.additionB,
-                  }).map((_, i) => (
-                    <span key={i} className="text-3xl">
-                      🍌
-                    </span>
-                  ))}
+                <AvatarSVG name="bear" className="w-32 h-32 mb-3 animate-float" />
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {Array.from({ length: gameVars.targetVal }).map((_, i) => <CookieSVG key={i} className="w-12 h-12" />)}
+                  {Array.from({ length: gameVars.subVal }).map((_, i) => <CookieSVG key={i} className="w-12 h-12 opacity-20" />)}
                 </div>
               </div>
             )}
-            {gameId === "cookie-bear" && (
+            {gameId === 'falling-apples' && (
               <div className="flex flex-col items-center">
-                <span className="text-6xl mb-3">🐻</span>
-                <div className="flex gap-2 flex-wrap">
-                  {Array.from({ length: gameVars.targetVal }).map((_, i) => (
-                    <span key={i} className="text-3xl">
-                      🍪
-                    </span>
-                  ))}
-                  {Array.from({ length: gameVars.subVal }).map((_, i) => (
-                    <span key={i} className="text-3xl opacity-30 line-through">
-                      🍪
-                    </span>
-                  ))}
+                <div className="flex gap-2 flex-wrap justify-center">
+                  {Array.from({ length: gameVars.targetVal }).map((_, i) => <AppleSVG key={i} className="w-12 h-12 animate-float" />)}
+                  {Array.from({ length: gameVars.subVal }).map((_, i) => <AppleSVG key={i} className="w-12 h-12 opacity-20" />)}
                 </div>
               </div>
             )}
-            {gameId === "falling-apples" && (
-              <div className="flex flex-col items-center">
-                <div className="flex gap-2">
-                  {Array.from({ length: gameVars.targetVal }).map((_, i) => (
-                    <AppleSVG key={i} className="w-10 h-10" />
-                  ))}
-                  {Array.from({ length: gameVars.subVal }).map((_, i) => (
-                    <AppleSVG key={i} className="w-10 h-10 opacity-20" />
-                  ))}
-                </div>
+            {gameId === 'birds-away' && (
+              <div className="flex gap-2 flex-wrap justify-center">
+                {Array.from({ length: gameVars.targetVal }).map((_, i) => <BirdSVG key={i} className="w-14 h-14 animate-float" />)}
+                {Array.from({ length: gameVars.subVal }).map((_, i) => <BirdSVG key={i} className="w-14 h-14 opacity-20" />)}
               </div>
             )}
-            {gameId === "birds-away" && (
-              <div className="flex gap-2 flex-wrap">
-                {Array.from({ length: gameVars.targetVal }).map((_, i) => (
-                  <span key={i} className="text-4xl">
-                    🐦
-                  </span>
-                ))}
-                {Array.from({ length: gameVars.subVal }).map((_, i) => (
-                  <span key={i} className="text-4xl opacity-10">
-                    🐦
-                  </span>
-                ))}
-              </div>
-            )}
-            {gameId === "school-bus" && (
+            {gameId === 'school-bus' && (
               <div className="flex flex-col items-center">
                 <BusSVG className="w-64 h-40 mb-4 animate-float" />
                 <div className="flex gap-2 flex-wrap justify-center">
                   {Array.from({ length: gameVars.targetVal }).map((_, i) => (
-                    <span key={i} className="text-3xl">
-                      👶
-                    </span>
+                    <KidSVG key={i} className="w-12 h-12" />
                   ))}
                   {Array.from({ length: gameVars.subVal }).map((_, i) => (
-                    <span key={i} className="text-3xl opacity-20 line-through">
-                      👶
-                    </span>
+                    <KidSVG key={i} className="w-12 h-12 opacity-20" />
                   ))}
                 </div>
               </div>
@@ -723,9 +607,7 @@ export const GamePlayer: React.FC = () => {
 
             {/* Bubble choices options */}
             <div className="flex flex-col gap-4 mt-8">
-              <p className="text-xl font-bold text-slate-600">
-                Choose the correct total:
-              </p>
+              <p className="text-xl font-bold text-slate-600">Choose the correct total:</p>
               <div className="flex justify-center gap-4">
                 {choices.map((num) => (
                   <motion.button
@@ -735,8 +617,8 @@ export const GamePlayer: React.FC = () => {
                     onClick={() => handleChoice(num)}
                     className={`w-20 h-20 rounded-full border-4 text-3xl font-black text-white shadow-lg cursor-pointer flex items-center justify-center transition-all ${
                       wrongAnswerId === num
-                        ? "bg-coral border-red-600 animate-wobble shadow-[0_6px_0_#b71c1c]"
-                        : "bg-orange-play border-orange-500 hover:bg-orange-400 shadow-[0_8px_0_#f57c00]"
+                        ? 'bg-coral border-red-600 animate-wobble shadow-[0_6px_0_#b71c1c]'
+                        : 'bg-orange-play border-orange-500 hover:bg-orange-400 shadow-[0_8px_0_#f57c00]'
                     }`}
                   >
                     {num}
@@ -754,7 +636,7 @@ export const GamePlayer: React.FC = () => {
         stars={15}
         coins={10}
         title="Spectacular Job! 🌟"
-        onNext={() => navigate("/kids/numeracy")}
+        onNext={() => navigate('/kids/numeracy')}
       />
     </div>
   );
