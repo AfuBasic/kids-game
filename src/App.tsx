@@ -6,6 +6,8 @@ import { KidsDashboard } from './pages/KidsDashboard';
 import { CountUp } from './features/numeracy/CountUp';
 import { CountDown } from './features/numeracy/CountDown';
 import { ParentSettings } from './pages/ParentSettings';
+import { NumeracyHome } from './features/numeracy/NumeracyHome';
+import { GamePlayer } from './features/numeracy/GamePlayer';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +18,8 @@ const App: React.FC = () => {
           <Route path="/kids" element={<KidsDashboard />} />
           <Route path="/kids/count-up" element={<CountUp />} />
           <Route path="/kids/count-down" element={<CountDown />} />
+          <Route path="/kids/numeracy" element={<NumeracyHome />} />
+          <Route path="/kids/numeracy/:gameId" element={<GamePlayer />} />
           <Route path="/parent" element={<ParentSettings />} />
         </Routes>
       </Router>
@@ -24,3 +28,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+

@@ -107,7 +107,15 @@ export const KidsDashboard: React.FC = () => {
             <motion.div
               key={cat.id}
               whileHover={!cat.locked ? { scale: 1.05, x: 5 } : {}}
-              className={`p-4 rounded-2xl text-2xl font-bold text-white shadow-md select-none relative overflow-hidden flex items-center justify-between ${cat.bg}`}
+              onClick={() => {
+                if (!cat.locked) {
+                  audioService.play('pop');
+                  navigate(`/kids/${cat.id}`);
+                } else {
+                  audioService.play('wrong');
+                }
+              }}
+              className={`p-4 rounded-2xl text-2xl font-bold text-white shadow-md select-none relative overflow-hidden flex items-center justify-between cursor-pointer ${cat.bg}`}
             >
               <span>{cat.name}</span>
               {cat.locked && <FiLock className="text-white/60 text-2xl" />}
