@@ -198,3 +198,28 @@ export const TruckSVG: React.FC<{ className?: string }> = ({ className = 'w-24 h
   </svg>
 );
 
+// Cartoon School Bus SVG
+export const BusSVG: React.FC<{ className?: string }> = ({ className = 'w-48 h-32' }) => (
+  <svg viewBox="0 0 160 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Wheels */}
+    <circle cx="35" cy="80" r="14" fill="#374151" stroke="#1f2937" strokeWidth="4" />
+    <circle cx="35" cy="80" r="5" fill="#ffffff" />
+    <circle cx="120" cy="80" r="14" fill="#374151" stroke="#1f2937" strokeWidth="4" />
+    <circle cx="120" cy="80" r="5" fill="#ffffff" />
+    {/* Bus body */}
+    <rect x="10" y="15" width="130" height="52" rx="12" fill="#ffd54f" stroke="#ffb300" strokeWidth="5" />
+    {/* Front Hood */}
+    <path d="M140 40H150C154 40 156 43 156 47V67H140V40Z" fill="#ffd54f" stroke="#ffb300" strokeWidth="5" />
+    {/* Windows */}
+    <rect x="22" y="25" width="22" height="22" rx="4" fill="#cfd8dc" stroke="#78909c" strokeWidth="3" />
+    <rect x="52" y="25" width="22" height="22" rx="4" fill="#cfd8dc" stroke="#78909c" strokeWidth="3" />
+    <rect x="82" y="25" width="22" height="22" rx="4" fill="#cfd8dc" stroke="#78909c" strokeWidth="3" />
+    <rect x="112" y="25" width="22" height="22" rx="4" fill="#cfd8dc" stroke="#78909c" strokeWidth="3" />
+    {/* Lights */}
+    <circle cx="152" cy="55" r="4" fill="#ffeb3b" />
+    {/* Stripes */}
+    <rect x="10" y="52" width="130" height="6" fill="#374151" />
+  </svg>
+);
+
+
